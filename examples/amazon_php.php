@@ -1,0 +1,34 @@
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+	// API.Market URL: https://prod.api.market/api/v1/osint-trace-1/amazon-checker/check/amazon
+CURLOPT_URL => "https://amazon-checker.p.rapidapi.com/check",
+	CURLOPT_RETURNTRANSFER => true,
+	CURLOPT_ENCODING => "",
+	CURLOPT_MAXREDIRS => 10,
+	CURLOPT_TIMEOUT => 30,
+	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	CURLOPT_CUSTOMREQUEST => "POST",
+	CURLOPT_POSTFIELDS => json_encode([
+		'input' => 'test@example.com'
+	]),
+	// API.Market Header: X-Api-Key: YOUR_API_KEY
+CURLOPT_HTTPHEADER => [
+		"Content-Type: application/json",
+		"x-rapidapi-host: amazon-checker.p.rapidapi.com",
+		"x-rapidapi-key: Sign Up for Key"
+	],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+	echo "cURL Error #:" . $err;
+} else {
+	echo $response;
+}
